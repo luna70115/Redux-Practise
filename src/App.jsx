@@ -3,13 +3,13 @@ import reactLogo from "./assets/react.svg";
 import "./App.scss";
 import { useEffect } from "react";
 import { useState } from "react";
-import { Add } from "./add";
+import { Add } from "./Add";
 import { useSelector, useDispatch } from "react-redux";
 import {
   increment,
   decrement,
   incrementByAmount,
-  selectCout,
+  selectCount,
   addAsync,
 } from "./features/counter/counterSlice";
 import {
@@ -22,7 +22,7 @@ import {
 export function App() {
   const [numcount, setNumCount] = useState("5");
   const dispatch = useDispatch();
-  const count = useSelector(selectCout);
+  const count = useSelector(selectCount);
   const imgUrl = useSelector(selectImgUrl);
   const imgID = useSelector(selectImgId);
   
