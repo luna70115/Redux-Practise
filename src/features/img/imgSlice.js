@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const imgAxiosData = createAsyncThunk(
+export const getImg = createAsyncThunk(
   "img/imgAxiosData",
   async (imgId, { rejectWithValue }) => {
     try {
@@ -17,7 +17,7 @@ export const imgAxiosData = createAsyncThunk(
 );
 
 const imgSlice = createSlice({
-  name: "imgAPI",
+  name: "img",
   initialState: {
     url: "",
     id: 1,
@@ -31,21 +31,22 @@ const imgSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(imgAxiosData.pending, (state) => {
+      .addCase(getImg.pending, (state) => {
         state.loading = true;
         state.error = null;
+        state.url = null;
       })
-      .addCase(imgAxiosData.fulfilled, (state, action) => {
+      .addCase(getImg.fulfilled, (state, action) => {
         state.loading = false;
         state.url = action.payload;
       })
-      .addCase(imgAxiosData.rejected, (state, action) => {
+      .addCase(getImg.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
   },
 });
 export const { addID } = imgSlice.actions;
-export const selectImgUrl = (state) => state.imgAPI.url;
-export const selectImgId = (state) => state.imgAPI.id;
-export const imgURL = imgSlice.reducer;
+export const selectImgUrl = (state) => state.img.url;
+export const selectImgId = (state) => state.img.id;
+export const imgReducer = imgSlice.reducer;

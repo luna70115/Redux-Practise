@@ -1,33 +1,34 @@
+import viteLogo from "/vite.svg";
+import reactLogo from "./assets/react.svg";
+import "./App.scss";
 import { useEffect } from "react";
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import { Add } from "./add";
 import { useSelector, useDispatch } from "react-redux";
 import {
   increment,
   decrement,
   incrementByAmount,
-  selectCoubt,
+  selectCout,
   addAsync,
 } from "./features/counter/counterSlice";
 import {
   selectImgId,
   selectImgUrl,
   addID,
-  imgAxiosData,
-} from "./features/counter/img";
-import "./App.scss";
+  getImg,
+} from "./features/img/imgSlice";
 
-function App() {
+export function App() {
   const [numcount, setNumCount] = useState("5");
   const dispatch = useDispatch();
-  const count = useSelector(selectCoubt);
+  const count = useSelector(selectCout);
   const imgUrl = useSelector(selectImgUrl);
   const imgID = useSelector(selectImgId);
+  
   useEffect(() => {
     if (imgID !== 0) {
-      dispatch(imgAxiosData(imgID));
+      dispatch(getImg(imgID));
     }
   }, [dispatch, imgID]);
 
@@ -53,7 +54,7 @@ function App() {
           <p className="card__text">{count}</p>
           <button
             className="card__button"
-            onClick={() => dispatch(() => dispatch(decrement()))}
+            onClick={() => dispatch(decrement())}
           >
             -
           </button>
@@ -72,7 +73,6 @@ function App() {
           className="card__button"
           onClick={() => {
             dispatch(addID());
-            dispatch(imgAxiosData(imgID));
           }}
         >
           圖片
@@ -82,5 +82,3 @@ function App() {
     </>
   );
 }
-
-export default App;

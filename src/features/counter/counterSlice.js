@@ -21,11 +21,11 @@ export const counterSlice = createSlice({
 });
 
 export const { increment, decrement, incrementByAmount } = counterSlice.actions;
-export const selectCoubt = (state) => state.counter.value;
+export const selectCout = (state) => state.counter.value;
 export const addAsync = (amount) => (dispatch) => {
   setTimeout(() => {
     dispatch(incrementByAmount(amount));
   }, 1000);
 };
 
-export default counterSlice.reducer;
+export const counterReducer = counterSlice.reducer;
